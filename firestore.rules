@@ -1,0 +1,141 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Helper function: Authenticated and UID matches document owner
+    function isOwner(userId) {
+      return request.auth != null && request.auth.uid == userId;
+    }
+
+    // Helper function: Verified operator account for publicHoneyTraces management
+    function isAuthorizedOperator() {
+      return request.auth != null
+        && request.auth.token.email == 'gtbguider@gmail.com'
+        && request.auth.token.email_verified == true;
+    }
+
+    // Helper function: Strict validation for publicHoneyTraces (forbids uid, lot.id, hiveIds, notes, originalText, etc.)
+    function isValidPublicHoneyTrace(data) {
+      return data.keys().hasAll([
+        'publicTraceId',
+        'productType',
+        'productName',
+        'honeyType',
+        'nectarSource',
+        'productionStartDate',
+        'productionEndDate',
+        'harvestSummary',
+        'lotNumber',
+        'traceabilityMessage',
+        'verifiedAt',
+        'hasVerifiedJournalEvidence',
+        'publishedAt',
+        'updatedAt',
+        'isPublished'
+      ]) &&
+      data.keys().hasOnly([
+        'publicTraceId',
+        'productType',
+        'productName',
+        'productImageUrl',
+        'productId',
+        'packageUnit',
+        'storageMethod',
+        'honeyType',
+        'nectarSource',
+        'productionStartDate',
+        'productionEndDate',
+        'totalYieldKg',
+        'harvestSummary',
+        'lotNumber',
+        'traceabilityMessage',
+        'verifiedAt',
+        'farmName',
+        'hasVerifiedJournalEvidence',
+        'harvestOperationCount',
+        'evidenceJournalCount',
+        'evidenceJournals',
+        'harvestRecords',
+        'inspectionReport',
+        'publishedAt',
+        'updatedAt',
+        'isPublished'
+      ]) &&
+      data.publicTraceId is string &&
+      data.productType in ['honey', 'royalJelly', 'propolis', 'other'] &&
+      data.productName is string &&
+      data.honeyType is string &&
+      data.nectarSource is string &&
+      data.productionStartDate is string &&
+      data.productionEndDate is string &&
+      data.harvestSummary is string &&
+      data.lotNumber is string &&
+      data.traceabilityMessage is string &&
+      data.verifiedAt is string &&
+      data.hasVerifiedJournalEvidence is bool &&
+      data.publishedAt is string &&
+      data.updatedAt is string &&
+      data.isPublished is bool;
+    }
+
+    // Default deny all undefined paths
+    match /{document=**} {
+      allow read, write: if false;
+    }
+
+    // Public consumer honey traceability collection: publicHoneyTraces/{publicTraceId}
+    // - Unauthenticated consumers: read allowed, write strictly denied
+    // - Verified operator publish/unpublish path: strict schema validation (no private fields allowed)
+    match /publicHoneyTraces/{publicTraceId} {
+      allow read: if true;
+      allow create, update: if isAuthorizedOperator()
+        && isValidPublicHoneyTrace(request.resource.data)
+        && request.resource.data.publicTraceId == publicTraceId;
+      allow delete: if isAuthorizedOperator();
+    }
+
+    // User private root document and collections
+    match /users/{userId} {
+      allow read, write: if isOwner(userId);
+
+      // Apiaries subcollection: users/{uid}/apiaries/{apiaryId}
+      match /apiaries/{apiaryId} {
+        allow read, write: if isOwner(userId);
+
+        // Hives inside apiary: users/{uid}/apiaries/{apiaryId}/hives/{hiveId}
+        match /hives/{hiveId} {
+          allow read, write: if isOwner(userId);
+        }
+      }
+
+      // Journals (Beekeeping inspection logs): users/{uid}/journals/{journalId}
+      match /journals/{journalId} {
+        allow read, write: if isOwner(userId);
+      }
+
+      // Breeder Queens & Lineage: users/{uid}/queens/{queenId}
+      match /queens/{queenId} {
+        allow read, write: if isOwner(userId);
+      }
+
+      // Sales records: users/{uid}/sales/{saleId}
+      match /sales/{saleId} {
+        allow read, write: if isOwner(userId);
+      }
+
+      // Expense records: users/{uid}/expenses/{expenseId}
+      match /expenses/{expenseId} {
+        allow read, write: if isOwner(userId);
+      }
+
+      // Honey LOTs (Production batch records): users/{uid}/honeyLots/{lotId}
+      match /honeyLots/{lotId} {
+        allow read, write: if isOwner(userId);
+      }
+
+      // Beekeeper Products (Catalog & photo metadata): users/{uid}/products/{productId}
+      match /products/{productId} {
+        allow read, write: if isOwner(userId);
+      }
+    }
+  }
+}

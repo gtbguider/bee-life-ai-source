@@ -1,0 +1,221 @@
+{
+  "entities": {
+    "user": {
+      "title": "User",
+      "description": "User profile and farm configuration",
+      "type": "object",
+      "properties": {
+        "name": { "type": "string" },
+        "farmName": { "type": "string" },
+        "companyName": { "type": "string" },
+        "phone": { "type": "string" },
+        "applicantAddress": { "type": "string" },
+        "apiaryLocation": { "type": "string" },
+        "apiaryTitle": { "type": "string" },
+        "hiveCount": { "type": "number" },
+        "email": { "type": "string" },
+        "updatedAt": { "type": "string" }
+      },
+      "required": ["name", "apiaryLocation", "hiveCount"]
+    },
+    "apiary": {
+      "title": "Apiary",
+      "description": "Apiary location and scale",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "address": { "type": "string" },
+        "hiveCount": { "type": "number" },
+        "updatedAt": { "type": "string" }
+      },
+      "required": ["id", "name", "address"]
+    },
+    "hive": {
+      "title": "Hive",
+      "description": "Individual hive telemetry and inspection status",
+      "type": "object",
+      "properties": {
+        "id": { "type": "number" },
+        "name": { "type": "string" },
+        "queenGen": { "type": "string" },
+        "queenAge": { "type": "string" },
+        "status": { "type": "string" },
+        "eggRate": { "type": "number" },
+        "honeyYield": { "type": "number" },
+        "lastCheckDate": { "type": "string" },
+        "notes": { "type": "string" },
+        "updatedAt": { "type": "string" }
+      },
+      "required": ["id", "name", "status"]
+    },
+    "journal": {
+      "title": "Journal",
+      "description": "Voice and AI structured beekeeping inspection records",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "hiveRange": { "type": "string" },
+        "text": { "type": "string" },
+        "status": { "type": "string" },
+        "timestamp": { "type": "string" },
+        "date": { "type": "string" },
+        "category": { "type": "string" },
+        "weatherTag": { "type": "string" },
+        "weatherSnapshot": { "type": "object" },
+        "tags": { "type": "array", "items": { "type": "string" } },
+        "audioDuration": { "type": "string" },
+        "honeyYieldKg": { "type": "number" },
+        "originalText": { "type": "string" },
+        "aiSummary": { "type": "string" },
+        "audioUrl": { "type": "string" },
+        "photoUrls": { "type": "array", "items": { "type": "string" } },
+        "updatedAt": { "type": "string" }
+      },
+      "required": ["id", "hiveRange", "text", "date", "status"]
+    },
+    "queen": {
+      "title": "BreederQueen",
+      "description": "Breeder queen lineage and evaluation metrics",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "hiveId": { "type": "number" },
+        "parentQueenId": { "type": ["string", "null"] },
+        "generation": { "type": "string" },
+        "breed": { "type": "string" },
+        "installedDate": { "type": "string" },
+        "status": { "type": "string" },
+        "honeyHarvestKg": { "type": "number" },
+        "propolisYieldG": { "type": "number" },
+        "royalJellyYieldG": { "type": "number" },
+        "colonyStrength": { "type": "number" },
+        "eggLayingRate": { "type": "number" },
+        "docilityScore": { "type": "string" },
+        "logs": { "type": "array" },
+        "notes": { "type": "string" },
+        "isFavorite": { "type": "boolean" },
+        "updatedAt": { "type": "string" }
+      },
+      "required": ["id", "name", "hiveId", "generation", "breed", "status"]
+    },
+    "sale": {
+      "title": "SaleRecord",
+      "description": "Beekeeping product sales record for Jeonnam standard form",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "date": { "type": "string" },
+        "item": { "type": "string" },
+        "customItemName": { "type": "string" },
+        "unit": { "type": "string" },
+        "quantity": { "type": "number" },
+        "unitPrice": { "type": "number" },
+        "totalAmount": { "type": "number" },
+        "channel": { "type": "string" },
+        "buyerName": { "type": "string" },
+        "paymentMethod": { "type": "string" },
+        "notes": { "type": "string" },
+        "updatedAt": { "type": "string" }
+      },
+      "required": ["id", "date", "item", "unit", "quantity", "unitPrice", "totalAmount", "channel", "paymentMethod"]
+    },
+    "expense": {
+      "title": "ExpenseRecord",
+      "description": "Beekeeping management expense record",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "date": { "type": "string" },
+        "category": { "type": "string" },
+        "itemName": { "type": "string" },
+        "unit": { "type": "string" },
+        "quantity": { "type": "number" },
+        "unitPrice": { "type": "number" },
+        "totalAmount": { "type": "number" },
+        "vendor": { "type": "string" },
+        "paymentMethod": { "type": "string" },
+        "notes": { "type": "string" },
+        "updatedAt": { "type": "string" }
+      },
+      "required": ["id", "date", "category", "itemName", "unit", "quantity", "unitPrice", "totalAmount", "vendor", "paymentMethod"]
+    },
+    "publicHoneyTrace": {
+      "title": "PublicHoneyTrace",
+      "description": "Sanitized consumer-facing honey traceability record without internal farm data",
+      "type": "object",
+      "properties": {
+        "publicTraceId": { "type": "string" },
+        "productType": { "type": "string", "enum": ["honey", "royalJelly", "propolis"] },
+        "productName": { "type": "string" },
+        "honeyType": { "type": "string" },
+        "nectarSource": { "type": "string" },
+        "productionStartDate": { "type": "string" },
+        "productionEndDate": { "type": "string" },
+        "totalYieldKg": { "type": "number" },
+        "harvestSummary": { "type": "string" },
+        "lotNumber": { "type": "string" },
+        "traceabilityMessage": { "type": "string" },
+        "verifiedAt": { "type": "string" },
+        "farmName": { "type": "string" },
+        "hasVerifiedJournalEvidence": { "type": "boolean" },
+        "harvestOperationCount": { "type": "number" },
+        "publishedAt": { "type": "string" },
+        "updatedAt": { "type": "string" },
+        "isPublished": { "type": "boolean" }
+      },
+      "required": [
+        "publicTraceId",
+        "productType",
+        "productName",
+        "honeyType",
+        "nectarSource",
+        "productionStartDate",
+        "productionEndDate",
+        "harvestSummary",
+        "lotNumber",
+        "traceabilityMessage",
+        "verifiedAt",
+        "hasVerifiedJournalEvidence",
+        "publishedAt",
+        "updatedAt",
+        "isPublished"
+      ]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": "user",
+      "description": "User profile and primary farm configuration"
+    },
+    "/users/{userId}/apiaries/{apiaryId}": {
+      "schema": "apiary",
+      "description": "Apiary location and scale"
+    },
+    "/users/{userId}/apiaries/{apiaryId}/hives/{hiveId}": {
+      "schema": "hive",
+      "description": "Individual hive telemetry and status"
+    },
+    "/users/{userId}/journals/{journalId}": {
+      "schema": "journal",
+      "description": "Inspection and voice journal entries"
+    },
+    "/users/{userId}/queens/{queenId}": {
+      "schema": "queen",
+      "description": "Breeder queens and pedigree data"
+    },
+    "/users/{userId}/sales/{saleId}": {
+      "schema": "sale",
+      "description": "Sales records for Jeonnam standard ledger"
+    },
+    "/users/{userId}/expenses/{expenseId}": {
+      "schema": "expense",
+      "description": "Expense records for Jeonnam standard ledger"
+    },
+    "/publicHoneyTraces/{publicTraceId}": {
+      "schema": "publicHoneyTrace",
+      "description": "Publicly readable sanitized honey traceability records for consumers"
+    }
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "name": "Remix Honeybee Teco - 스마트 양봉 관리",
+  "description": "인공지능 기반 음성 내검 기록, 벌통 및 여왕벌 종봉 계보 관리, AI 수익성 분석 및 꿀 이력제 추적 시스템",
+  "requestFramePermissions": [
+    "microphone"
+  ],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}

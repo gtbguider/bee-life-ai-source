@@ -1,0 +1,78 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500" width="100%" height="100%">
+  <defs>
+    <style>
+      .logo-line { stroke: #000000; stroke-width: 4; stroke-linecap: round; stroke-linejoin: round; fill: none; }
+      .logo-thick { stroke: #000000; stroke-width: 7; stroke-linecap: round; stroke-linejoin: round; fill: none; }
+      .logo-fill { fill: #000000; stroke: #000000; stroke-width: 2; }
+      .logo-text-honeybee { font-family: 'Inter', 'Noto Sans KR', -apple-system, sans-serif; font-size: 26px; font-weight: 500; letter-spacing: 0.46em; fill: #000000; text-anchor: middle; }
+      .logo-text-teco { font-family: 'Inter', 'Noto Sans KR', -apple-system, sans-serif; font-size: 26px; font-weight: 500; letter-spacing: 0.68em; fill: #000000; text-anchor: middle; }
+    </style>
+  </defs>
+
+  <!-- Honeybee Teco Geometric Emblem -->
+  <g transform="translate(250, 160)">
+    <!-- LEFT WING HONEYCOMB CLUSTER & CONTOUR -->
+    <!-- Wing Outer Polygon -->
+    <polygon points="-58,-52 -135,-52 -170,-3 -135,46 -58,46" class="logo-thick" />
+    <!-- Wing Interior Honeycomb Cells (Pointy-topped) -->
+    <!-- Col -1 (Outer) -->
+    <polygon points="-135,-23 -148,-15 -148,0 -135,8 -122,0 -122,-15" class="logo-line" />
+    <polygon points="-135,8 -148,16 -148,31 -135,39 -122,31 -122,16" class="logo-line" />
+    <!-- Col -2 (Mid outer) -->
+    <polygon points="-112,-38 -125,-30 -125,-15 -112,-7 -99,-15 -99,-30" class="logo-line" />
+    <polygon points="-112,-7 -125,1 -125,16 -112,24 -99,16 -99,1" class="logo-line" />
+    <polygon points="-112,24 -125,32 -125,47 -112,55 -99,47 -99,32" class="logo-line" />
+    <!-- Col -3 (Mid inner) -->
+    <polygon points="-89,-23 -102,-15 -102,0 -89,8 -76,0 -76,-15" class="logo-line" />
+    <polygon points="-89,8 -102,16 -102,31 -89,39 -76,31 -76,16" class="logo-line" />
+    <!-- Col -4 (Inner) -->
+    <polygon points="-66,-38 -79,-30 -79,-15 -66,-7 -53,-15 -53,-30" class="logo-line" />
+    <polygon points="-66,-7 -79,1 -79,16 -66,24 -53,16 -53,1" class="logo-line" />
+    <polygon points="-66,24 -79,32 -79,47 -66,55 -53,47 -53,32" class="logo-line" />
+
+    <!-- RIGHT WING HONEYCOMB CLUSTER & CONTOUR (Mirrored) -->
+    <polygon points="58,-52 135,-52 170,-3 135,46 58,46" class="logo-thick" />
+    <!-- Col 1 (Outer) -->
+    <polygon points="135,-23 122,-15 122,0 135,8 148,0 148,-15" class="logo-line" />
+    <polygon points="135,8 122,16 122,31 135,39 148,31 148,16" class="logo-line" />
+    <!-- Col 2 (Mid outer) -->
+    <polygon points="112,-38 99,-30 99,-15 112,-7 125,-15 125,-30" class="logo-line" />
+    <polygon points="112,-7 99,1 99,16 112,24 125,16 125,1" class="logo-line" />
+    <polygon points="112,24 99,32 99,47 112,55 125,47 125,32" class="logo-line" />
+    <!-- Col 3 (Mid inner) -->
+    <polygon points="89,-23 76,-15 76,0 89,8 102,0 102,-15" class="logo-line" />
+    <polygon points="89,8 76,16 76,31 89,39 102,31 102,16" class="logo-line" />
+    <!-- Col 4 (Inner) -->
+    <polygon points="66,-38 53,-30 53,-15 66,-7 79,-15 79,-30" class="logo-line" />
+    <polygon points="66,-7 53,1 53,16 66,24 79,16 79,1" class="logo-line" />
+    <polygon points="66,24 53,32 53,47 66,55 79,47 79,32" class="logo-line" />
+
+    <!-- CENTRAL BEE BODY: HEAD / THORAX (Top Hexagon) -->
+    <polygon points="0,-125 45,-99 45,-47 0,-21 -45,-47 -45,-99" class="logo-thick" />
+    <!-- Head Facet / Diamond Lines -->
+    <line x1="-45" y1="-99" x2="45" y2="-99" class="logo-line" />
+    <line x1="-45" y1="-99" x2="0" y2="-21" class="logo-line" />
+    <line x1="45" y1="-99" x2="0" y2="-21" class="logo-line" />
+
+    <!-- CENTRAL X-THORAX CROSSING (The stylized bee waist) -->
+    <!-- Top-left to Center petal -->
+    <polygon points="-45,-47 0,-21 -15,-3" class="logo-thick" />
+    <!-- Top-right to Center petal -->
+    <polygon points="45,-47 0,-21 15,-3" class="logo-thick" />
+    <!-- Bottom-left to Center petal -->
+    <polygon points="-45,5 0,-21 -15,-39" class="logo-thick" />
+    <!-- Bottom-right to Center petal -->
+    <polygon points="45,5 0,-21 15,-39" class="logo-thick" />
+
+    <!-- ABDOMEN (Lower Hexagon segment + Curved tip) -->
+    <polygon points="-45,-3 -45,49 0,75 45,49 45,-3" class="logo-thick" />
+    <!-- Center Inverted Chevron on Abdomen -->
+    <polyline points="-45,49 0,23 45,49" class="logo-thick" />
+    <!-- Abdomen Round Tip -->
+    <path d="M -34,49 C -34,88 34,88 34,49" class="logo-line" stroke-width="4.5" />
+  </g>
+
+  <!-- Typography Below (Exact Tracking) -->
+  <text x="264" y="380" class="logo-text-honeybee">HONEYBEE</text>
+  <text x="268" y="432" class="logo-text-teco">TECO</text>
+</svg>
